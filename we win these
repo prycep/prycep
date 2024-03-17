@@ -1,0 +1,259 @@
+setScreen("TitleScreen");
+
+var companyNames = ["McFroggie's", "Toadstool Cafe", "GameSwamp", "Amazon Forest"];
+var value = [279, 90, 174, 14];
+var buyShares = [0, 0, 0, 0];
+var sellShares = [0, 0, 0, 0];
+var bo = ["Restaurant brand that splits it up into independent franchises, enduring business with long legacy of trust.", "TSC Corporation is an American multinational chain of coffeehouses and roastery reserves. The largest coffeehouse chain in the pond.", "Video game, consumer electronics, and gaming merchandise retailer.", "Multinational corporation and technology company focusing on e-commerce, cloud computing, online advertising, digital streaming, and artificial intelligence."];
+var fr = [" McFroggies projects 2% growth in 4 years", " In the last 6 months the stock has seen a decline from 98.70. Summer is not too far and student demand for coffee will decrease as the academic year comes to an end.", "GameSwamp experienced a major spike approximately 4 years ago of a 1838% increase, then proceeded to slowly descend to current price.", "In the last year AMZNF experienced growth from 98.85 to 174.42 with ever increasing desire for effortless purchases."];
+var i = 0;
+setText("boText", bo[i]);
+setText("frText", fr[i]);
+
+//Arrows
+onEvent("rightArrow", "click", function() {
+  if (i===4) {
+  } else {
+    i = i + 1;
+    if (i == 0) {
+      showElement("graph1");
+      hideElement("leftArrow");
+    } else {
+      hideElement("graph1");
+      showElement("leftArrow");
+    }
+    if (i == 1) {
+      showElement("graph2");
+    } else {
+      hideElement("graph2");
+    }
+    if (i == 2) {
+      showElement("graph3");
+    } else {
+      hideElement("graph3");
+    }
+    if (i == 3) {
+      showElement("graph4");
+      hideElement("rightArrow");
+    } else {
+      hideElement("graph4");
+      showElement("rightArrow");
+    }
+    setText("companyName", companyNames[i]);
+    setText("valueText", value[i]);
+    setText("boText", bo[i]);
+    setText("frText", fr[i]);
+    setChecked("buyCheckbox", buyShares[i]);
+    setChecked("sellCheckbox", sellShares[i]);
+  }
+});
+
+onEvent("leftArrow", "click", function() {
+  if (i===0) {
+  } else {
+    i = i - 1;
+    if (i == 0) {
+      showElement("graph1");
+      hideElement("leftArrow");
+    } else {
+      hideElement("graph1");
+      showElement("leftArrow");
+    }
+    if (i == 1) {
+      showElement("graph2");
+    } else {
+      hideElement("graph2");
+    }
+    if (i == 2) {
+      showElement("graph3");
+    } else {
+      hideElement("graph3");
+    }
+    if (i == 3) {
+      showElement("graph4");
+      hideElement("rightArrow");
+    } else {
+      hideElement("graph4");
+      showElement("rightArrow");
+    }
+    setText("companyName", companyNames[i]);
+    setText("valueText", value[i]);
+    setText("boText", bo[i]);
+    setText("frText", fr[i]);
+    setChecked("buyCheckbox", buyShares[i]);
+    setChecked("sellCheckbox", sellShares[i]);
+  }
+});
+
+// Checkboxes
+onEvent("buyCheckbox", "click", function() {
+  buyShares[i] = getChecked("buyCheckbox");
+  if (buyShares[i] == true) {
+    LilyPad = LilyPad - value[i];
+    setText("LilyPadLabel", "LilyPad: " + LilyPad);
+    setText("LilyPadLabel2", "LilyPad: " + LilyPad);
+    setText("LilyPadLabel3", "LilyPad: " + LilyPad);
+    setText("LilyPadLabel4", "LilyPad: " + LilyPad);
+  }
+});
+
+onEvent("sellCheckbox", "click", function() {
+  if (buyShares[i] == 0 || buyShares[i] == "false") {
+  } else {
+    sellShares[i] = getChecked("buyCheckbox");
+    LilyPad = LilyPad + value[i];
+    setText("LilyPadLabel", "LilyPad: " + LilyPad);
+    setText("LilyPadLabel2", "LilyPad: " + LilyPad);
+    setText("LilyPadLabel3", "LilyPad: " + LilyPad);
+    setText("LilyPadLabel4", "LilyPad: " + LilyPad);
+    setChecked("buyCheckbox", false);
+    setChecked("sellCheckbox", false);
+    buyShares[i] = getChecked("buyCheckbox");
+  }
+});
+
+var list = ["", "My name is Hopscotch and I am here to explain you what some of the components on your screen do.", "This is the currency system.  You'll start off with 1000 Lilypads.", "This keeps track of the number of days that would go by.", "The Frog News is use to keep up with the changing trends of the market.", "The Stock Market Button shows a graph of the changing stocks and it is the place where you sell or buy stocks.", "Thanks you for hearing me out. Click the next button again to start your investments.", ""];
+var story_Index = 0;
+var LilyPad = 1000;
+var Day = 0;
+
+onEvent("StartButton", "click", function() {
+  setScreen("HopscotchScreen");
+  setText("LilyPadLabel", "LilyPads: " + LilyPad);
+  setText("DayLabel", "Day: " + Day);
+  setText("LilyPadLabel2", "LilyPads: " + LilyPad);
+  setText("DayLabel2", "Day: " + Day);
+  setText("LilyPadLabel3", "LilyPads: " + LilyPad);
+  setText("DayLabel3", "Day: " + Day);
+  setText("LilyPadLabel4", "LilyPads: " + LilyPad);
+  setText("DayLabel4", "Day: " + Day);
+});
+
+onEvent("NextButton", "click", function() {
+  story_Index = story_Index + 1;
+  setText("TextBox1", list[story_Index]);
+  if (story_Index == 2) {
+    showElement("arrow1");
+  } else {
+    hideElement("arrow1");
+  }
+  if (story_Index == 3) {
+    showElement("arrow2");
+  } else {
+    hideElement("arrow2");
+  }
+  if (story_Index == 4) {
+    showElement("arrow3");
+  } else {
+    hideElement("arrow3");
+  }
+  if (story_Index == 5) {
+    showElement("arrow4");
+  } else {
+    hideElement("arrow4");
+  }
+  if (story_Index == 6) {
+    setScreen("tradingScreen");
+  }
+});
+
+onEvent("FrogNews2", "click", function() {
+  setScreen("FrogNewsScreen");
+});
+
+onEvent("StockMarket2", "click", function() {
+  setScreen("tradingScreen");
+});
+
+onEvent("FrogNews3", "click", function() {
+  setScreen("FrogNewsScreen");
+});
+
+onEvent("StockMarket3", "click", function() {
+  setScreen("tradingScreen");
+});
+
+onEvent("RestartButton", "click", function() {
+  i = 0;
+  story_Index = 0;
+  LilyPad = 1000;
+  Day = 0;
+  value = [279, 90, 174, 14];
+  buyShares = [0, 0, 0, 0];
+  sellShares = [0, 0, 0, 0];
+  setScreen("HopscotchScreen");
+});
+
+//var value = [279, 90, 174, 14];
+var k = 0;
+onEvent("nextday", "click", function() {
+  day();
+});
+timedLoop(1000, function() {
+  showElement("frogOpenMouth");
+  hideElement("frogClosedMouth");
+});
+setTimeout(function() {
+  timedLoop(1000, function() {
+    hideElement("frogOpenMouth");
+    showElement("frogClosedMouth");
+  });
+}, 500);
+
+timedLoop(1000, function() {
+  showElement("frogOpenMouth2");
+  hideElement("frogClosedMouth2");
+});
+setTimeout(function() {
+  timedLoop(1000, function() {
+    hideElement("frogOpenMouth2");
+    showElement("frogClosedMouth2");
+  });
+}, 500);
+
+function day() {
+  setScreen("FrogNewsScreen");
+k = k + 1;
+  Day = Day + 1;
+  setText("DayLabel", "Day: " + Day);
+  setText("DayLabel2", "Day: " + Day);
+  setText("DayLabel3", "Day: " + Day);
+  setText("DayLabel4", "Day: " + Day);
+  if (Day >= 4) {
+    setScreen("EndScreen");
+    setText("ResultLabel", "Result: " + LilyPad);
+    if (LilyPad >= 1500) {
+      setText("SurviveLabel", "You Win!");
+    } else {
+      setText("SurviveLabel", "You Lose!");
+    }
+  }
+if (k==1) {
+  setProperty("image1", "image", "Screenshot-2024-03-16-163839.png");
+  setProperty("image2", "image", "Screenshot-2024-03-16-163933.png");
+  setText("text_area5", "With Amazon Forest’s In-person item return centers being transformed into AI manned stations returning items has become easier. As such, stocks are going up!");
+  setText("text_area6", "Fake pokemon card scandal at GameSwamp headquarters! GameSwamp stock go brrr into the ground!");
+  if (buyShares[3] == 0) {
+    value[3] = value[3]*1.19;
+    return value[3];
+  }
+  if (buyShares[2] == 0) {
+    value[2] = value[2]*0.63;
+    return value[2];
+  }
+} else if (k==2) {
+  setProperty("image1", "image", "Screenshot-2024-03-16-163839.png");
+  setProperty("image2", "image", "Screenshot-2024-03-16-163933.png");
+  setText("text_area5", "The New McFly is back! The McFroggies stock is blowing up!");
+  setText("text_area6", "Lack of students staying up late has caused a drop in coffee purchases! Toadstool Cafe stock is dropping");
+  if (buyShares[0] == 0) {
+    value[0] = value[0]*1.38;
+    return value[0];
+  }
+  if (buyShares[1] == 0) {
+    value[1] = value[1]*0.74;
+    return value[1];
+  }
+}
+  return value;
+}
